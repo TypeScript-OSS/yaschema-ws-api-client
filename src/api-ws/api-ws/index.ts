@@ -7,7 +7,10 @@ import { genericCommandSchema } from 'yaschema-ws-api';
 import { triggerOnCommandRequestValidationErrorHandler } from '../../config/on-command-request-validation-error';
 import { triggerOnCommandResponseValidationErrorHandler } from '../../config/on-command-response-validation-error';
 import { getDefaultRequestValidationMode, getDefaultResponseValidationMode } from '../../config/validation-mode';
-import type { WsApiConnectionChangeHandler, WsApiErrorHandler, WsApiMessageReceiptHandler, WsApiRequestors } from '../exports';
+import type { WsApiConnectionChangeHandler } from '../types/WsApiConnectionChangeHandler';
+import type { WsApiErrorHandler } from '../types/WsApiErrorHandler';
+import type { WsApiMessageReceiptHandler } from '../types/WsApiMessagReceiptHandler';
+import type { WsApiRequestors } from '../types/WsApiRequestors';
 import type { WsApiResponseHandlers } from '../types/WsApiResponseHandlers';
 import { generateWsRequirementsFromApiWsRequest } from './generate-ws-requirements-from-api-ws-request';
 
