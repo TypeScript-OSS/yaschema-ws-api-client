@@ -56,6 +56,11 @@ export const apiWs = async <RequestCommandsT extends AnyCommands, ResponseComman
   const output = (Object.entries(api.schemas.requests) as Array<[keyof RequestCommandsT & string, Schema]>).reduce(
     (out, [requestCommandName, requestCommand]) => {
       out[requestCommandName] = async (value) => {
+        if (ws.readyState !== WebSocket.OPEN) {
+          // Ignoring output attempts when the WebSocket isn't open
+          return;
+        }
+
         const commandSerializationResult = await requestCommand.serializeAsync(value, { validation: requestValidationMode });
         if (commandSerializationResult.error !== undefined) {
           if (requestValidationMode === 'hard') {
