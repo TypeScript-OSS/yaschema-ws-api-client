@@ -14,7 +14,7 @@ import type { WsApiRequestors } from '../types/WsApiRequestors';
 import type { WsApiResponseHandlers } from '../types/WsApiResponseHandlers';
 import { generateWsRequirementsFromApiWsRequest } from './generate-ws-requirements-from-api-ws-request';
 
-export interface ApiWsOptions<QueryT extends AnyQuery> {
+export interface ApiWsOptions<RequestCommandsT extends AnyCommands, QueryT extends AnyQuery> {
   /**
    * Override the configured request validation mode.
    *
@@ -30,22 +30,22 @@ export interface ApiWsOptions<QueryT extends AnyQuery> {
    */
   responseValidationMode?: ValidationMode;
 
-  onConnect?: WsApiConnectionChangeHandler<QueryT>;
-  onDisconnect?: WsApiConnectionChangeHandler<QueryT>;
-  onMessage?: WsApiMessageReceiptHandler<QueryT>;
-  onError?: WsApiErrorHandler<QueryT>;
+  onConnect?: WsApiConnectionChangeHandler<RequestCommandsT, QueryT>;
+  onDisconnect?: WsApiConnectionChangeHandler<RequestCommandsT, QueryT>;
+  onMessage?: WsApiMessageReceiptHandler<RequestCommandsT, QueryT>;
+  onError?: WsApiErrorHandler<RequestCommandsT, QueryT>;
 }
 
 /** Uses a WebSocket to access the specified API */
 export const apiWs = async <RequestCommandsT extends AnyCommands, ResponseCommandsT extends AnyCommands, QueryT extends AnyQuery>(
   api: WsApi<RequestCommandsT, ResponseCommandsT, QueryT>,
   req: OptionalIfPossiblyUndefined<'query', QueryT>,
-  responseHandlers: WsApiResponseHandlers<RequestCommandsT, ResponseCommandsT, QueryT>,
+  responseHandlers: Partial<WsApiResponseHandlers<RequestCommandsT, ResponseCommandsT, QueryT>>,
   {
     requestValidationMode = getDefaultRequestValidationMode(),
     responseValidationMode = getDefaultResponseValidationMode(),
     ...eventHandlers
-  }: ApiWsOptions<QueryT> = {}
+  }: ApiWsOptions<RequestCommandsT, QueryT> = {}
 ): Promise<{ ws: WebSocket; output: WsApiRequestors<RequestCommandsT> }> => {
   const query = req.query as QueryT;
 
@@ -101,16 +101,16 @@ export const apiWs = async <RequestCommandsT extends AnyCommands, ResponseComman
     ws.onopen = null;
     ws.onmessage = null;
 
-    eventHandlers.onDisconnect?.({ ws, query });
+    eventHandlers.onDisconnect?.({ ws, query, output });
   };
 
   ws.onopen = () => {
-    eventHandlers.onConnect?.({ ws, query });
+    eventHandlers.onConnect?.({ ws, query, output });
   };
 
   ws.onmessage = async ({ data }) => {
     // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
-    eventHandlers.onMessage?.({ ws, query: query as QueryT, message: data });
+    eventHandlers.onMessage?.({ ws, query: query as QueryT, output, message: data });
 
     if (typeof data !== 'string') {
       return;
@@ -122,21 +122,21 @@ export const apiWs = async <RequestCommandsT extends AnyCommands, ResponseComman
       json = JSON.parse(data);
     } catch (e) {
       if (e instanceof Error) {
-        eventHandlers.onError?.({ ws, query, error: e });
+        eventHandlers.onError?.({ ws, query, output, error: e });
       }
       return;
     }
 
     const genericResponse = genericCommandSchema.deserialize(json, { okToMutateInputValue: true, validation: 'hard' });
     if (genericResponse.error !== undefined) {
-      eventHandlers.onError?.({ ws, query, error: new Error(genericResponse.error) });
+      eventHandlers.onError?.({ ws, query, output, error: new Error(genericResponse.error) });
       return;
     }
 
     const responseCommandName = genericResponse.deserialized.command as keyof ResponseCommandsT & string;
     const responseCommand = api.schemas.responses[responseCommandName];
     if (responseCommand === undefined) {
-      eventHandlers.onError?.({ ws, query, error: new Error(`No definition found for command ${responseCommandName}`) });
+      eventHandlers.onError?.({ ws, query, output, error: new Error(`No definition found for command ${responseCommandName}`) });
       return;
     }
 
@@ -159,7 +159,7 @@ export const apiWs = async <RequestCommandsT extends AnyCommands, ResponseComman
     }
 
     const responseHandler = responseHandlers[responseCommandName];
-    await responseHandler({
+    await responseHandler?.({
       ws,
       query,
       input: commandDeserializationResult.deserialized as ResponseCommandsT[typeof responseCommandName]['valueType'],

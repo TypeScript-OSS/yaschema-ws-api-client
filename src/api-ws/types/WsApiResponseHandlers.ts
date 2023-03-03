@@ -8,5 +8,5 @@ export type WsApiResponseHandlers<
   ResponseCommandsT extends Record<string, Schema>,
   QueryT extends AnyQuery
 > = {
-  [K in keyof RequestCommandsT & string]: WsApiResponseHandler<RequestCommandsT, ResponseCommandsT, K, QueryT>;
+  [K in keyof ResponseCommandsT & string]: WsApiResponseHandler<RequestCommandsT, ResponseCommandsT, K, QueryT>;
 };

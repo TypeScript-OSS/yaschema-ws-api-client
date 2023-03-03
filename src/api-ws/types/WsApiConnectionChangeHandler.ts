@@ -1,3 +1,9 @@
-import type { AnyQuery } from 'yaschema-ws-api';
+import type { AnyCommands, AnyQuery } from 'yaschema-ws-api';
 
-export type WsApiConnectionChangeHandler<QueryT extends AnyQuery> = (args: { ws: WebSocket; query: QueryT }) => Promise<void>;
+import type { WsApiRequestors } from './WsApiRequestors';
+
+export type WsApiConnectionChangeHandler<RequestCommandsT extends AnyCommands, QueryT extends AnyQuery> = (args: {
+  ws: WebSocket;
+  query: QueryT;
+  output: WsApiRequestors<RequestCommandsT>;
+}) => Promise<void>;
