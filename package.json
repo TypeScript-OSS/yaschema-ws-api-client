@@ -1,6 +1,6 @@
 {
   "name": "yaschema-ws-api-web-client",
-  "version": "0.0.0-alpha.2",
+  "version": "0.0.0-alpha.3",
   "description": "Web client supporting WebSockets via yaschema-ws-api",
   "keywords": [
     "schema",
@@ -32,7 +32,7 @@
   "peerDependencies": {},
   "dependencies": {
     "yaschema": "^2.0.2",
-    "yaschema-api": "^2.0.1",
+    "yaschema-api": "^2.0.2",
     "yaschema-ws-api": "0.0.0-alpha.0"
   },
   "devDependencies": {
