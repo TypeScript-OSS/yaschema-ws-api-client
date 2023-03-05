@@ -1,9 +1,9 @@
-# yaschema-ws-api-web-client
+# yaschema-ws-api-client
 
 [![Downloads][downloads-badge]][downloads]
 [![Size][size-badge]][size]
 
-Web client supporting WebSockets via yaschema-ws-api
+Client supporting WebSockets via yaschema-ws-api
 
 ## Basic Example
 
@@ -23,16 +23,16 @@ With yaschema-api, types can be defined for:
 
 Thanks for checking it out.  Feel free to create issues or otherwise provide feedback.
 
-[API Docs](https://passfolio.github.io/yaschema-ws-api-web-client/)
+[API Docs](https://passfolio.github.io/yaschema-ws-api-client/)
 
 Be sure to check out our other [Open Source @ Passfolio](https://github.com/Passfolio) projects as well.
 
 <!-- Definitions -->
 
-[downloads-badge]: https://img.shields.io/npm/dm/yaschema-ws-api-web-client.svg
+[downloads-badge]: https://img.shields.io/npm/dm/yaschema-ws-api-client.svg
 
-[downloads]: https://www.npmjs.com/package/yaschema-ws-api-web-client
+[downloads]: https://www.npmjs.com/package/yaschema-ws-api-client
 
-[size-badge]: https://img.shields.io/bundlephobia/minzip/yaschema-ws-api-web-client.svg
+[size-badge]: https://img.shields.io/bundlephobia/minzip/yaschema-ws-api-client.svg
 
-[size]: https://bundlephobia.com/result?p=yaschema-ws-api-web-client
+[size]: https://bundlephobia.com/result?p=yaschema-ws-api-client
