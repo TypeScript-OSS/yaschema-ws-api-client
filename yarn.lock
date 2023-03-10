@@ -4650,10 +4650,10 @@ yaschema-api@^2.0.2:
   dependencies:
     yaschema "^2.0.2"
 
-yaschema-ws-api@0.0.0-alpha.0:
-  version "0.0.0-alpha.0"
-  resolved "https://registry.yarnpkg.com/yaschema-ws-api/-/yaschema-ws-api-0.0.0-alpha.0.tgz#0e09a4937364b625adf02cb3f3ff243c493ea110"
-  integrity sha512-NFXrNWgAeTxqMjK1B+1Y9iLLNcUGxHR8DtmN8rmMty8HFtc5y0Ql3yS2JphOwXHL0qqHXymL3eL/bobU7sUohg==
+yaschema-ws-api@^1.0.0:
+  version "1.0.0"
+  resolved "https://registry.yarnpkg.com/yaschema-ws-api/-/yaschema-ws-api-1.0.0.tgz#53466de6306efcde4d4edd190093cb71afed063e"
+  integrity sha512-BXk+kvikvTu98M/FR+XrqLpfdxOL/RwvZcOv5MK+fVc/o99/ud+Uexw3yQISqwzALrXC127NL3CsCJ+fuvlRnA==
   dependencies:
     yaschema "^2.0.2"
 
