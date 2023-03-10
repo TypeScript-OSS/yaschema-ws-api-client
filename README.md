@@ -8,16 +8,45 @@ Client supporting WebSockets via yaschema-ws-api
 ## Basic Example
 
 ```typescript
-…
+export const stream = makeWsApi({
+  routeType: 'stream',
+  url: '/stream',
+  schemas: {
+    requests: {
+      ping: schema.object({ echo: schema.string().allowEmptyString().optional() }).optional()
+    },
+    responses: {
+      pong: schema.object({
+        body: schema.string()
+      })
+    }
+  }
+});
 ```
 
-The above example demonstrates compile-time, type-safe use of a yaschema-api, which also performs runtime validation.  With yaschema-api, both the client and server can use the same API definitions.  However, it's also fine for the API definitions to be used in a one-sided way, for example, when integrating with third-party REST APIs.
+```typescript
+const connection = await apiWs(
+  stream,
+  {},
+  {
+    pong: async ({ input }) => {
+      console.log(`GOT ${input.body}`)
+    }
+  }
+);
 
-With yaschema-api, types can be defined for:
+await connection.output.ping({ echo: 'Hello World!' });
+```
 
-- request headers, params, query, and body
-- success response status, headers, and body
-- expected failure response status, headers, and body
+The above example demonstrates basic use of a yaschema-ws-api-client, which lets you define runtime and compile-time types for bidirectionally working with WebSockets.  See the [express-yaschema-ws-api-handler](https://www.npmjs.com/package/express-yaschema-ws-api-handler) package for adding handlers to Express.
+
+This library supports web-based WebSockets by default and supports the Node [ws](https://www.npmjs.com/package/ws) package by calling:
+
+```typescript
+setWebSocket(WebSocket as any as CommonWebSocket);
+```
+
+While the Node ws WebSocket interface doesn't perfectly align with the web equivalent, for the aspects we use, it does.
 
 ## Thanks
 
