@@ -86,7 +86,7 @@ export const apiWs = async <RequestCommandsT extends AnyCommands, ResponseComman
 
           const genericRequest = genericCommandSchema.serialize(
             { command: requestCommandName, body: commandSerializationResult.serialized },
-            { okToMutateInputValue: true, validation: 'hard' }
+            { validation: 'hard' }
           );
           if (genericRequest.error !== undefined) {
             console.warn(`Failed to serialize request for command ${requestCommandName}, which shouldn't happen:`, genericRequest.error);
@@ -136,7 +136,7 @@ export const apiWs = async <RequestCommandsT extends AnyCommands, ResponseComman
         return;
       }
 
-      const genericResponse = genericCommandSchema.deserialize(json, { okToMutateInputValue: true, validation: 'hard' });
+      const genericResponse = genericCommandSchema.deserialize(json, { validation: 'hard' });
       if (genericResponse.error !== undefined) {
         eventHandlers.onError?.({ ws, query, output, error: new Error(genericResponse.error) });
         return;
@@ -150,7 +150,6 @@ export const apiWs = async <RequestCommandsT extends AnyCommands, ResponseComman
       }
 
       const commandDeserializationResult = await responseCommand.deserializeAsync(genericResponse.deserialized.body, {
-        okToMutateInputValue: true,
         validation: responseValidationMode
       });
       if (commandDeserializationResult.error !== undefined) {
