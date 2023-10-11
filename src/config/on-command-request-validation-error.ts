@@ -4,7 +4,7 @@ interface OnCommandRequestValidationErrorHandlerArgs {
   api: GenericWsApi;
   command: string;
   /** This will be undefined in cases where we didn't get to deserialize the request */
-  res: AnyBody | undefined;
+  res: AnyBody;
   invalidPart: 'body';
   validationError: string;
 }
