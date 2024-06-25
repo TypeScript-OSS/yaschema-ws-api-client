@@ -4,16 +4,16 @@ import type { OptionalIfPossiblyUndefined } from 'yaschema-api';
 import type { AnyCommands, AnyQuery, GenericWsApi, WsApi } from 'yaschema-ws-api';
 import { genericCommandSchema } from 'yaschema-ws-api';
 
-import { triggerOnCommandRequestValidationErrorHandler } from '../../config/on-command-request-validation-error';
-import { triggerOnCommandResponseValidationErrorHandler } from '../../config/on-command-response-validation-error';
-import { getDefaultRequestValidationMode, getDefaultResponseValidationMode } from '../../config/validation-mode';
-import { getWebSocket } from '../../config/websocket';
+import { triggerOnCommandRequestValidationErrorHandler } from '../../config/on-command-request-validation-error.js';
+import { triggerOnCommandResponseValidationErrorHandler } from '../../config/on-command-response-validation-error.js';
+import { getDefaultRequestValidationMode, getDefaultResponseValidationMode } from '../../config/validation-mode.js';
+import { getWebSocket } from '../../config/websocket.js';
 import type { WsApiConnectionChangeHandler } from '../types/WsApiConnectionChangeHandler';
 import type { WsApiErrorHandler } from '../types/WsApiErrorHandler';
 import type { WsApiMessageReceiptHandler } from '../types/WsApiMessagReceiptHandler';
 import type { WsApiRequestors } from '../types/WsApiRequestors';
 import type { WsApiResponseHandlers } from '../types/WsApiResponseHandlers';
-import { generateWsRequirementsFromApiWsRequest } from './generate-ws-requirements-from-api-ws-request';
+import { generateWsRequirementsFromApiWsRequest } from './generate-ws-requirements-from-api-ws-request.js';
 
 export interface ApiWsOptions<RequestCommandsT extends AnyCommands, QueryT extends AnyQuery> {
   /**

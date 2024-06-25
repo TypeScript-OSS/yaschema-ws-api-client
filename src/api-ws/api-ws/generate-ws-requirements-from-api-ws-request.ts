@@ -5,8 +5,8 @@ import type { OptionalIfPossiblyUndefined } from 'yaschema-api';
 import { getUrlBaseForRouteType } from 'yaschema-api';
 import type { AnyCommands, AnyQuery, GenericWsApi, WsApi } from 'yaschema-ws-api';
 
-import { triggerOnRequestValidationErrorHandler } from '../../config/on-request-validation-error';
-import { makeQueryString } from '../../internal-utils/make-query-string';
+import { triggerOnRequestValidationErrorHandler } from '../../config/on-request-validation-error.js';
+import { makeQueryString } from '../../internal-utils/make-query-string.js';
 
 const anyStringSerializableTypeSchema = schema.oneOf3(
   schema.number().setAllowedSerializationForms(['number', 'string']),
