@@ -1,4 +1,3 @@
-import _ from 'lodash';
 import type { ValidationMode } from 'yaschema';
 import { schema } from 'yaschema';
 import type { OptionalIfPossiblyUndefined } from 'yaschema-api';

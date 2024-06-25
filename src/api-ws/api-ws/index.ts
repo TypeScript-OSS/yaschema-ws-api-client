@@ -1,4 +1,3 @@
-import _ from 'lodash';
 import type { Schema, ValidationMode } from 'yaschema';
 import type { OptionalIfPossiblyUndefined } from 'yaschema-api';
 import type { AnyCommands, AnyQuery, GenericWsApi, WsApi } from 'yaschema-ws-api';
