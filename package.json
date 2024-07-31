@@ -1,6 +1,6 @@
 {
   "name": "yaschema-ws-api-client",
-  "version": "2.2.4",
+  "version": "2.2.5",
   "description": "Client supporting WebSockets via yaschema-ws-api",
   "keywords": [
     "schema",
@@ -38,8 +38,8 @@
   "peerDependencies": {},
   "dependencies": {
     "yaschema": "^3.6.0",
-    "yaschema-api": "^3.6.3",
-    "yaschema-ws-api": "^2.3.3"
+    "yaschema-api": "^3.7.0",
+    "yaschema-ws-api": "^2.3.4"
   },
   "devDependencies": {
     "@eslint/compat": "1.1.1",
