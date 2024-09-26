@@ -1,4 +1,5 @@
-import type { AnyQuery, GenericWsApi } from 'yaschema-ws-api';
+import type { AnyQuery } from 'yaschema-api';
+import type { GenericWsApi } from 'yaschema-ws-api';
 
 interface OnRequestValidationErrorHandlerArgs {
   api: GenericWsApi;

@@ -1,6 +1,6 @@
 import type { Schema, ValidationMode } from 'yaschema';
-import type { OptionalIfPossiblyUndefined } from 'yaschema-api';
-import type { AnyCommands, AnyQuery, GenericWsApi, WsApi } from 'yaschema-ws-api';
+import type { AnyQuery, OptionalIfPossiblyUndefined } from 'yaschema-api';
+import type { AnyCommands, GenericWsApi, WsApi } from 'yaschema-ws-api';
 import { genericCommandSchema } from 'yaschema-ws-api';
 
 import { triggerOnCommandRequestValidationErrorHandler } from '../../config/on-command-request-validation-error.js';
@@ -9,7 +9,7 @@ import { getDefaultRequestValidationMode, getDefaultResponseValidationMode } fro
 import { getWebSocket } from '../../config/websocket.js';
 import type { WsApiConnectionChangeHandler } from '../types/WsApiConnectionChangeHandler';
 import type { WsApiErrorHandler } from '../types/WsApiErrorHandler';
-import type { WsApiMessageReceiptHandler } from '../types/WsApiMessagReceiptHandler';
+import type { WsApiMessageReceiptHandler } from '../types/WsApiMessageReceiptHandler.js';
 import type { WsApiRequestors } from '../types/WsApiRequestors';
 import type { WsApiResponseHandlers } from '../types/WsApiResponseHandlers';
 import { generateWsRequirementsFromApiWsRequest } from './generate-ws-requirements-from-api-ws-request.js';

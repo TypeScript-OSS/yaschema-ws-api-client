@@ -1,21 +1,10 @@
 import type { ValidationMode } from 'yaschema';
-import { schema } from 'yaschema';
-import type { OptionalIfPossiblyUndefined } from 'yaschema-api';
-import { getUrlBaseForRouteType } from 'yaschema-api';
-import type { AnyCommands, AnyQuery, GenericWsApi, WsApi } from 'yaschema-ws-api';
+import type { AnyQuery, OptionalIfPossiblyUndefined } from 'yaschema-api';
+import { anyReqQuerySchema, getUrlBaseForRouteType } from 'yaschema-api';
+import type { AnyCommands, GenericWsApi, WsApi } from 'yaschema-ws-api';
 
 import { triggerOnRequestValidationErrorHandler } from '../../config/on-request-validation-error.js';
 import { makeQueryString } from '../../internal-utils/make-query-string.js';
-
-const anyStringSerializableTypeSchema = schema.oneOf3(
-  schema.number().setAllowedSerializationForms(['number', 'string']),
-  schema.boolean().setAllowedSerializationForms(['boolean', 'string']),
-  schema.string()
-);
-
-const anyReqQuerySchema = schema
-  .record(schema.string(), schema.oneOf(anyStringSerializableTypeSchema, schema.array({ items: anyStringSerializableTypeSchema })))
-  .optional();
 
 export class WsRequirementsError extends Error {
   constructor(message: string) {

@@ -1,4 +1,4 @@
-import type { AnyQuery } from 'yaschema-ws-api';
+import type { AnyQuery } from 'yaschema-api';
 
 /** Converts a yaschema-api query value into a query string, which can be used in a URL */
 export const makeQueryString = (query: AnyQuery) => {
