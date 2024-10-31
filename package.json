@@ -1,6 +1,6 @@
 {
   "name": "yaschema-ws-api-client",
-  "version": "2.2.8",
+  "version": "2.2.9",
   "description": "Client supporting WebSockets via yaschema-ws-api",
   "keywords": [
     "schema",

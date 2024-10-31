@@ -16,10 +16,12 @@ export const makeQueryString = (query: AnyQuery) => {
           continue; // Skipping
         }
 
+        // eslint-disable-next-line @typescript-eslint/no-base-to-string
         output.push(`${encodedKey}=${encodeURIComponent(String(v))}`);
       }
     } else {
       const encodedKey = encodeURIComponent(key);
+      // eslint-disable-next-line @typescript-eslint/no-base-to-string
       output.push(`${encodedKey}=${encodeURIComponent(String(value))}`);
     }
   }
