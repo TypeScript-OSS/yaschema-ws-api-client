@@ -83,7 +83,7 @@ export const apiWs = async <RequestCommandsT extends AnyCommands, ResponseComman
             }
           }
 
-          const genericRequest = genericCommandSchema.serialize(
+          const genericRequest = await genericCommandSchema.serializeAsync(
             { command: requestCommandName, body: commandSerializationResult.serialized },
             { validation: 'hard' }
           );
@@ -135,7 +135,7 @@ export const apiWs = async <RequestCommandsT extends AnyCommands, ResponseComman
         return;
       }
 
-      const genericResponse = genericCommandSchema.deserialize(json, { validation: 'hard' });
+      const genericResponse = await genericCommandSchema.deserializeAsync(json, { validation: 'hard' });
       if (genericResponse.error !== undefined) {
         eventHandlers.onError?.({ ws, query, output, error: new Error(genericResponse.error) });
         return;
