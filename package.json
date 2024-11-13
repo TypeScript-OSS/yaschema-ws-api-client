@@ -1,6 +1,6 @@
 {
   "name": "yaschema-ws-api-client",
-  "version": "4.0.1",
+  "version": "4.0.2",
   "description": "Client supporting WebSockets via yaschema-ws-api",
   "keywords": [
     "schema",
@@ -37,9 +37,9 @@
   },
   "peerDependencies": {},
   "dependencies": {
-    "yaschema": "^4.2.0",
-    "yaschema-api": "^4.0.2",
-    "yaschema-ws-api": "^3.0.2"
+    "yaschema": "^4.2.1",
+    "yaschema-api": "^4.0.3",
+    "yaschema-ws-api": "^3.0.3"
   },
   "devDependencies": {
     "@eslint/compat": "1.2.2",
@@ -50,8 +50,8 @@
     "@types/express-ws": "^3.0.5",
     "@types/jest": "^29.5.14",
     "@types/ws": "^8.5.13",
-    "@typescript-eslint/eslint-plugin": "^8.13.0",
-    "@typescript-eslint/parser": "^8.13.0",
+    "@typescript-eslint/eslint-plugin": "^8.14.0",
+    "@typescript-eslint/parser": "^8.14.0",
     "body-parser": "^1.20.3",
     "esbuild": "0.24.0",
     "esbuild-plugin-tsc": "0.4.0",
