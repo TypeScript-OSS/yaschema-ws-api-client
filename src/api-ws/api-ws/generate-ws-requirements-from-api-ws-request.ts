@@ -1,5 +1,5 @@
 import type { ValidationMode } from 'yaschema';
-import type { AnyQuery, OptionalIfPossiblyUndefined } from 'yaschema-api';
+import type { AnyQuery, ApiRoutingContext, OptionalIfPossiblyUndefined } from 'yaschema-api';
 import { anyReqQuerySchema, getUrlBaseForRouteType } from 'yaschema-api';
 import type { AnyCommands, GenericWsApi, WsApi } from 'yaschema-ws-api';
 
@@ -20,7 +20,11 @@ export const generateWsRequirementsFromApiWsRequest = async <
   QueryT extends AnyQuery
 >(
   api: WsApi<RequestCommandsT, ResponseCommandsT, QueryT>,
-  { validationMode, query }: { validationMode: ValidationMode } & OptionalIfPossiblyUndefined<'query', QueryT>
+  {
+    validationMode,
+    query,
+    context
+  }: { validationMode: ValidationMode; context?: ApiRoutingContext } & OptionalIfPossiblyUndefined<'query', QueryT>
 ): Promise<{ url: URL }> => {
   const reqQuery = await (api.schemas.connection?.query ?? anyReqQuerySchema).serializeAsync((query ?? {}) as QueryT, {
     validation: validationMode
@@ -43,7 +47,7 @@ export const generateWsRequirementsFromApiWsRequest = async <
   const queryString = makeQueryString(reqQuery.serialized as AnyQuery);
   const constructedUrl = `${api.url}${queryString.length > 0 ? '?' : ''}${queryString}`;
 
-  const urlBase = getUrlBaseForRouteType(api.routeType);
+  const urlBase = getUrlBaseForRouteType(api.routeType, { context });
   const url = new URL(constructedUrl, urlBase.length === 0 ? undefined : urlBase);
 
   return { url };

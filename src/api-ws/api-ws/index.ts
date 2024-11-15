@@ -1,5 +1,5 @@
 import type { Schema, ValidationMode } from 'yaschema';
-import type { AnyQuery, OptionalIfPossiblyUndefined } from 'yaschema-api';
+import type { AnyQuery, ApiRoutingContext, OptionalIfPossiblyUndefined } from 'yaschema-api';
 import type { AnyCommands, GenericWsApi, WsApi } from 'yaschema-ws-api';
 import { genericCommandSchema } from 'yaschema-ws-api';
 
@@ -50,13 +50,14 @@ export const apiWs = async <RequestCommandsT extends AnyCommands, ResponseComman
   {
     requestValidationMode = getDefaultRequestValidationMode(),
     responseValidationMode = getDefaultResponseValidationMode(),
+    context,
     ...eventHandlers
-  }: ApiWsOptions<RequestCommandsT, QueryT> = {}
+  }: ApiWsOptions<RequestCommandsT, QueryT> & { context?: ApiRoutingContext } = {}
 ): Promise<ApiWs<RequestCommandsT, ResponseCommandsT, QueryT>> => {
   const connect = async (): Promise<ApiWs<RequestCommandsT, ResponseCommandsT, QueryT>> => {
     const query = req.query as QueryT;
 
-    const { url } = await generateWsRequirementsFromApiWsRequest(api, { validationMode: requestValidationMode, query });
+    const { url } = await generateWsRequirementsFromApiWsRequest(api, { validationMode: requestValidationMode, query, context });
 
     const WebSocket = getWebSocket();
     const ws = new WebSocket(url);
