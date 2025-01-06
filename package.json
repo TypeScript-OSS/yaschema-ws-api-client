@@ -1,6 +1,6 @@
 {
   "name": "yaschema-ws-api-client",
-  "version": "4.1.3",
+  "version": "4.1.4",
   "description": "Client supporting WebSockets via yaschema-ws-api",
   "keywords": [
     "schema",
@@ -38,24 +38,24 @@
   "peerDependencies": {},
   "dependencies": {
     "yaschema": "^4.3.2",
-    "yaschema-api": "^4.1.3",
-    "yaschema-ws-api": "^3.1.3"
+    "yaschema-api": "^4.1.4",
+    "yaschema-ws-api": "^3.1.4"
   },
   "devDependencies": {
     "@eslint/compat": "1.2.4",
     "@eslint/eslintrc": "3.2.0",
-    "@eslint/js": "9.16.0",
+    "@eslint/js": "9.17.0",
     "@types/body-parser": "^1.19.5",
     "@types/express": "^5.0.0",
     "@types/express-ws": "^3.0.5",
     "@types/jest": "^29.5.14",
     "@types/ws": "^8.5.13",
-    "@typescript-eslint/eslint-plugin": "^8.17.0",
-    "@typescript-eslint/parser": "^8.17.0",
+    "@typescript-eslint/eslint-plugin": "^8.19.0",
+    "@typescript-eslint/parser": "^8.19.0",
     "body-parser": "^1.20.3",
-    "esbuild": "0.24.0",
+    "esbuild": "0.24.2",
     "esbuild-plugin-tsc": "0.4.0",
-    "eslint": "9.16.0",
+    "eslint": "9.17.0",
     "eslint-config-prettier": "^9.1.0",
     "eslint-import-resolver-typescript": "^3.7.0",
     "eslint-plugin-file-extension-in-import-ts": "2.1.1",
@@ -70,7 +70,7 @@
     "prettier": "3.4.2",
     "trash-cli": "6.0.0",
     "ts-jest": "^29.2.5",
-    "typedoc": "^0.27.3",
+    "typedoc": "^0.27.6",
     "typescript": "5.7.2",
     "ws": "^8.18.0"
   }
